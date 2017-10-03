@@ -124,11 +124,12 @@ function draftjsToMd(raw, extraMarkdownDict) {
 
       // add the symbol to the md string and push the style in the applied styles stack
       stylesStartAtChar.forEach(currentStyle => {
-        const symbolLength = markdownDict[currentStyle.style].length;
-        newText += markdownDict[currentStyle.style];
+        const mdSymbol = markdownDict[currentStyle.style] || '';
+        const symbolLength = mdSymbol.length;
+        newText += mdSymbol;
         totalOffset += symbolLength;
         appliedStyles.push({
-          symbol: markdownDict[currentStyle.style],
+          symbol: mdSymbol,
           range: {
             start: currentStyle.offset + totalOffset,
             end: currentStyle.offset + currentStyle.length + totalOffset
